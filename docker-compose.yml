@@ -18,7 +18,7 @@ services:
 #    - CPU_CORES_COUNT=6
 #    command: /opt/ovenmediaengine/bin/OvenMediaEngine -c origin_conf
 #    volumes:
-#    - ./origin_conf:/opt/ovenmediaengine/origin_conf
+#    - ./origin_conf:/opt/ovenmediaengine/bin/origin_conf
 #    - ./tls:/etc/ssl
 
   edge:
@@ -45,6 +45,6 @@ services:
     - OME_ACCESS_TOKEN=ome-access-token
     command: /opt/ovenmediaengine/bin/OvenMediaEngine -c edge_conf
     volumes:
-    - ./edge_conf:/opt/ovenmediaengine/edge_conf
+    - ./edge_conf:/opt/ovenmediaengine/bin/edge_conf
     - ./tls:/etc/ssl
     stop_signal: KILL
