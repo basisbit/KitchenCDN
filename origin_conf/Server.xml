@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Server version="8">
+	<Name>OvenMediaEngine</Name>
+	<Type>origin</Type>
+	<IP>*</IP>
+
+	<!-- Settings for the ports to bind -->
+	<Bind>
+		<Providers>
+			<RTMP>
+				<Port>${env:OME_RTMP_PROV_PORT:1935}</Port>
+			</RTMP>
+			<SRT>
+				<Port>${env:OME_SRT_PROV_PORT:9999}</Port>
+				<WorkerCount>2</WorkerCount>
+			</SRT>
+		</Providers>
+
+		<Publishers>
+			<!-- The OVT is protocol for ORIGIN-EDGE -->
+			<OVT>
+				<Port>${env:OVT_ORIGIN_PORT:9000}</Port>
+			</OVT>
+		</Publishers>
+	</Bind>
+
+	<VirtualHosts>
+		<VirtualHost>
+			<Name>default</Name>
+
+			<!-- Settings for multi ip/domain and TLS -->
+			<Host>
+				<Names>
+					<Name>${env:TLS_DOMAIN_NAME:oven.example.com}</Name>
+				</Names>
+				<TLS>
+					<CertPath>/etc/ssl/cert.crt</CertPath>
+					<KeyPath>/etc/ssl/key.key</KeyPath>
+					<!-- <ChainCertPath>/etc/ssl/chain.crt</ChainCertPath> -->
+				</TLS>
+			</Host>
+
+			<!-- Refer https://airensoft.gitbook.io/ovenmediaengine/signedpolicy
+
+			<SignedPolicy>
+				<PolicyQueryKeyName>${env:SIGNED_POLICY_POLICY_QUERY_KEY:policy}</PolicyQueryKeyName>
+				<SignatureQueryKeyName>${env:SIGNED_POLICY_SIGNATURE_QUERY_KEY:signature}</SignatureQueryKeyName>
+				<SecretKey>${env:SIGNED_URL_CRYPTO_KEY:aKq#1kj}</SecretKey>
+
+				<Enables>
+					<Providers>rtmp</Providers>
+					<Publishers>ovt</Publishers>
+				</Enables>
+			</SignedPolicy>
+			-->
+
+			<!-- Settings for applications -->
+			<Applications>
+				<Application>
+					<Name>source</Name>
+					<Type>live</Type>
+					<Providers>
+						<RTMP />
+						<SRT />
+					</Providers>
+					<OutputProfiles>
+						<OutputProfile>
+							<Name>bypass_stream</Name>
+							<OutputStreamName>${OriginStreamName}</OutputStreamName>
+							<Encodes>
+								<Audio>
+									<Bypass>true</Bypass>
+								</Audio>
+								<Video>
+									<Bypass>true</Bypass>
+								</Video>
+								<Audio>
+									<Codec>opus</Codec>
+									<Bitrate>192000</Bitrate>
+									<Samplerate>48000</Samplerate>
+									<Channel>2</Channel>
+								</Audio>
+							</Encodes>
+						</OutputProfile>
+						<OutputProfile>
+							<Name>ingame-360p</Name>
+							<OutputStreamName>${OriginStreamName}-360p</OutputStreamName>
+							<Encodes>
+								<Audio>
+									<Bypass>true</Bypass>
+								</Audio>
+								<Video>
+									<Bypass>false</Bypass>
+									<Codec>h264</Codec>
+									<Width>640</Width>
+									<Height>360</Height>
+									<Bitrate>1100000</Bitrate>
+									<Framerate>30.0</Framerate>
+									<KeyFrameInterval>30</KeyFrameInterval>
+									<BFrames>0</BFrames>
+									<Preset>faster</Preset>
+								</Video>
+								<Audio>
+									<Codec>opus</Codec>
+									<Bitrate>192000</Bitrate>
+									<Samplerate>48000</Samplerate>
+									<Channel>2</Channel>
+								</Audio>
+							</Encodes>
+						</OutputProfile>
+						<OutputProfile>
+							<Name>ingame</Name>
+							<OutputStreamName>${OriginStreamName}-216p</OutputStreamName>
+							<Encodes>
+								<Audio>
+									<Bypass>true</Bypass>
+								</Audio>
+								<Video>
+									<Bypass>false</Bypass>
+									<Codec>h264</Codec>
+									<Width>384</Width>
+									<Height>216</Height>
+									<Bitrate>800000</Bitrate>
+									<Framerate>30.0</Framerate>
+									<KeyFrameInterval>30</KeyFrameInterval>
+									<BFrames>0</BFrames>
+									<Preset>faster</Preset>
+								</Video>
+								<Audio>
+									<Codec>opus</Codec>
+									<Bitrate>192000</Bitrate>
+									<Samplerate>48000</Samplerate>
+									<Channel>2</Channel>
+								</Audio>
+							</Encodes>
+						</OutputProfile>
+						<OutputProfile>
+							<Name>ingame</Name>
+							<OutputStreamName>${OriginStreamName}-smol</OutputStreamName>
+							<Encodes>
+								<Audio>
+									<Bypass>true</Bypass>
+								</Audio>
+								<Video>
+									<Bypass>false</Bypass>
+									<Codec>h264</Codec>
+									<Width>384</Width>
+									<Height>216</Height>
+									<Bitrate>400000</Bitrate>
+									<Framerate>30.0</Framerate>
+									<KeyFrameInterval>30</KeyFrameInterval>
+									<BFrames>0</BFrames>
+									<Preset>faster</Preset>
+								</Video>
+								<Audio>
+									<Codec>opus</Codec>
+									<Bitrate>128000</Bitrate>
+									<Samplerate>48000</Samplerate>
+									<Channel>2</Channel>
+								</Audio>
+							</Encodes>
+						</OutputProfile>
+					</OutputProfiles>
+					<Publishers>
+						<StreamWorkerCount>${env:CPU_CORES_COUNT:2}</StreamWorkerCount>
+						<AppWorkerCount>${env:CPU_CORES_COUNT:2}</AppWorkerCount>
+						<OVT />
+					</Publishers>
+				</Application>
+			</Applications>
+		</VirtualHost>
+	</VirtualHosts>
+</Server>

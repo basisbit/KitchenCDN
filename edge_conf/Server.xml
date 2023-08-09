@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Server version="8">
+	<Name>OvenMediaEngine</Name>
+	<Type>edge</Type>
+	<IP>*</IP>
+
+	<!-- Settings for the ports to bind -->
+	<Bind>
+		<Providers>
+			<!-- Currently, OME doesn't support using the specified port for OVT Provider -->
+			<OVT>
+				<Port>9001</Port>
+			</OVT>
+		</Providers>
+
+		<Publishers>
+			<LLHLS>
+				<Port>80</Port>
+				<TLSPort>${env:TLS_HTTP_PORT:8943}</TLSPort>
+				<WorkerCount>1</WorkerCount>
+			</LLHLS>
+			<WebRTC>
+				<Signalling>
+					<TLSPort>${env:OME_SIGNALLING_PORT:3334}</TLSPort>
+					<WorkerCount>1</WorkerCount>
+				</Signalling>
+				<IceCandidates>
+					<TcpRelay>${env:OME_TCP_RELAY_ADDRESS:*:3478}</TcpRelay>
+					<IceCandidate>${env:OME_ICE_CANDIDATES:*:10000-10005/udp}</IceCandidate>
+					<TcpRelayWorkerCount>2</TcpRelayWorkerCount>
+				</IceCandidates>
+			</WebRTC>
+		</Publishers>
+		
+		<Managers>
+			<API>
+				<TLSPort>${env:TLS_API_PORT:8944}</TLSPort>
+			</API>
+		</Managers>
+	</Bind>
+
+	<Managers>
+		<Host>
+			<Names>
+				<Name>${env:TLS_DOMAIN_NAME:oven.example.com}</Name>
+			</Names>
+			<TLS>
+				<CertPath>/etc/ssl/cert.crt</CertPath>
+				<KeyPath>/etc/ssl/key.key</KeyPath>
+				<!-- <ChainCertPath>/etc/ssl/chain.crt</ChainCertPath> -->
+			</TLS>
+		</Host>
+		<API>
+			<AccessToken>${env:OME_ACCESS_TOKEN:ome-access-token}</AccessToken>
+		</API>
+	</Managers>
+
+	<VirtualHosts>
+		<VirtualHost include="VHost*.xml" />
+		<VirtualHost>
+			<Name>default</Name>
+
+			<!-- Settings for multi ip/domain and TLS -->
+			<Host>
+				<Names>
+					<Name>${env:TLS_DOMAIN_NAME:oven.example.com}</Name>
+				</Names>
+				<TLS>
+					<CertPath>/etc/ssl/cert.crt</CertPath>
+					<KeyPath>/etc/ssl/key.key</KeyPath>
+					<!-- <ChainCertPath>/etc/ssl/chain.crt</ChainCertPath> -->
+				</TLS>
+			</Host>
+			
+
+			<!-- Settings for ProxyPass (It can specify origin for each path) -->
+			<Origins>
+				<Properties>
+					<NoInputFailoverTimeout>3000</NoInputFailoverTimeout>
+					<UnusedStreamDeletionTimeout>60000</UnusedStreamDeletionTimeout>
+				</Properties>
+				<Origin>
+					<Location>/pony/</Location>
+					<Pass>
+						<Scheme>OVT</Scheme>
+						<Urls>
+							<Url>${env:OVT_ORIGIN_SERVER:}:${env:OVT_ORIGIN_PORT:9000}/source/</Url>
+						</Urls>
+					</Pass>
+					<!-- <ForwardQueryParams>true</ForwardQueryParams> -->
+				</Origin>
+			</Origins>
+			<Applications>
+				<Application>
+					<Name>pony</Name>
+					<Type>live</Type>
+					<Providers>
+						<OVT />
+					</Providers>
+					<OutputProfiles>
+						<OutputProfile>
+							<Name>bypass_stream</Name>
+							<OutputStreamName>${OriginStreamName}</OutputStreamName>
+							<Encodes>
+								<Audio>
+									<Bypass>true</Bypass>
+								</Audio>
+								<Video>
+									<Bypass>true</Bypass>
+								</Video>
+							</Encodes>
+						</OutputProfile>
+					</OutputProfiles>
+					<Publishers>
+						<StreamWorkerCount>${env:CPU_CORES_COUNT:4}</StreamWorkerCount>
+						<AppWorkerCount>2</AppWorkerCount>
+						<LLHLS>
+							<ChunkDuration>0.2</ChunkDuration>
+							<SegmentDuration>6</SegmentDuration>
+							<SegmentCount>10</SegmentCount>
+							<CrossDomains>
+								<Url>*</Url>
+							</CrossDomains>
+						</LLHLS>
+						<WebRTC>
+							<Timeout>30000</Timeout>
+							<Rtx>false</Rtx>
+							<Ulpfec>false</Ulpfec>
+							<JitterBuffer>true</JitterBuffer>
+						</WebRTC>
+						<RTMPPush>
+						</RTMPPush>
+					</Publishers>
+				</Application>
+			</Applications>
+		</VirtualHost>
+	</VirtualHosts>
+</Server>
