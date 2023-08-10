@@ -25,7 +25,7 @@ services:
     image: airensoft/ovenmediaengine:0.15.15
     restart: always
     ports:
-    - "80:80/tcp" # HTTP 1.1 LLHLS
+    - "80:80/tcp" # HTTP 1.2 HLS
     - "443:443/tcp" # HTTP 2 LLHLS
     - "3334:3334/tcp" # WebRTC Signalling
     - "3479:3479/tcp" # WebRTC TURN

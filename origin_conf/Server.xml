@@ -99,7 +99,9 @@
 									<Framerate>30.0</Framerate>
 									<KeyFrameInterval>30</KeyFrameInterval>
 									<BFrames>0</BFrames>
-									<Preset>faster</Preset>
+									<Preset>slow</Preset>
+									<Profile>high</Profile>
+									<ThreadCount>4</ThreadCount>
 								</Video>
 								<Audio>
 									<Codec>opus</Codec>
@@ -125,7 +127,7 @@
 									<Framerate>30.0</Framerate>
 									<KeyFrameInterval>30</KeyFrameInterval>
 									<BFrames>0</BFrames>
-									<Preset>faster</Preset>
+									<Preset>fast</Preset>
 								</Video>
 								<Audio>
 									<Codec>opus</Codec>

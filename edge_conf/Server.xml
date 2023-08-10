@@ -16,10 +16,13 @@
 
 		<Publishers>
 			<LLHLS>
-				<Port>80</Port>
 				<TLSPort>${env:TLS_HTTP_PORT:8943}</TLSPort>
 				<WorkerCount>1</WorkerCount>
 			</LLHLS>
+			<HLS>
+					<Port>80</Port>
+					<WorkerCount>1</WorkerCount>
+			</HLS>
 			<WebRTC>
 				<Signalling>
 					<TLSPort>${env:OME_SIGNALLING_PORT:3334}</TLSPort>
@@ -57,7 +60,6 @@
 	</Managers>
 
 	<VirtualHosts>
-		<VirtualHost include="VHost*.xml" />
 		<VirtualHost>
 			<Name>default</Name>
 
@@ -116,13 +118,20 @@
 						<StreamWorkerCount>${env:CPU_CORES_COUNT:4}</StreamWorkerCount>
 						<AppWorkerCount>2</AppWorkerCount>
 						<LLHLS>
-							<ChunkDuration>0.2</ChunkDuration>
+							<ChunkDuration>0.4</ChunkDuration>
 							<SegmentDuration>6</SegmentDuration>
-							<SegmentCount>10</SegmentCount>
+							<SegmentCount>5</SegmentCount>
 							<CrossDomains>
 								<Url>*</Url>
 							</CrossDomains>
 						</LLHLS>
+						<HLS>
+							<SegmentDuration>4</SegmentDuration>
+							<SegmentCount>3</SegmentCount>
+							<CrossDomains>
+								<Url>*</Url>
+							</CrossDomains>
+						</HLS>
 						<WebRTC>
 							<Timeout>30000</Timeout>
 							<Rtx>false</Rtx>
