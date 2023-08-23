@@ -23,7 +23,29 @@
 				<Port>${env:OVT_ORIGIN_PORT:9000}</Port>
 			</OVT>
 		</Publishers>
+		
+		<Managers>
+			<API>
+				<TLSPort>${env:TLS_API_PORT:8945}</TLSPort>
+			</API>
+		</Managers>
 	</Bind>
+
+	<Managers>
+		<Host>
+			<Names>
+				<Name>${env:TLS_DOMAIN_NAME:oven.example.com}</Name>
+			</Names>
+			<TLS>
+				<CertPath>/etc/ssl/cert.crt</CertPath>
+				<KeyPath>/etc/ssl/key.key</KeyPath>
+				<!-- <ChainCertPath>/etc/ssl/chain.crt</ChainCertPath> -->
+			</TLS>
+		</Host>
+		<API>
+			<AccessToken>${env:OME_ACCESS_TOKEN:ome-access-token}</AccessToken>
+		</API>
+	</Managers>
 
 	<VirtualHosts>
 		<VirtualHost>
@@ -168,6 +190,8 @@
 						<StreamWorkerCount>${env:CPU_CORES_COUNT:2}</StreamWorkerCount>
 						<AppWorkerCount>${env:CPU_CORES_COUNT:2}</AppWorkerCount>
 						<OVT />
+						<RTMPPush>
+						</RTMPPush>
 					</Publishers>
 				</Application>
 			</Applications>

@@ -138,8 +138,6 @@
 							<Ulpfec>false</Ulpfec>
 							<JitterBuffer>true</JitterBuffer>
 						</WebRTC>
-						<RTMPPush>
-						</RTMPPush>
 					</Publishers>
 				</Application>
 			</Applications>

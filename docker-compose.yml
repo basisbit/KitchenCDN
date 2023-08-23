@@ -6,12 +6,12 @@ services:
 #    restart: always
 #    ports:
 #    - "1935:1935/tcp" # RTMP Provider
-#    - "8443:8443/tcp" # TLS Management
+#    - "8945:8945/tcp" # TLS Management
 #    - "9000:9000/tcp" # OVT(Origin)
 #    - "9999:9999/udp" # SRT Provider
 #    environment:
 #    - OME_RTMP_PROV_PORT=1935
-#    - TLS_HTTP_PORT=8443
+#    - TLS_API_PORT=8945
 #    - OVT_ORIGIN_PORT=9000
 #    - OME_SRT_PROV_PORT=9999
 #    - TLS_DOMAIN_NAME=sinkx.example.com
