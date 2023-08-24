@@ -134,7 +134,7 @@
 							</Encodes>
 						</OutputProfile>
 						<OutputProfile>
-							<Name>ingame</Name>
+							<Name>ingame-216p</Name>
 							<OutputStreamName>${OriginStreamName}-216p</OutputStreamName>
 							<Encodes>
 								<Audio>
@@ -160,7 +160,7 @@
 							</Encodes>
 						</OutputProfile>
 						<OutputProfile>
-							<Name>ingame</Name>
+							<Name>ingame-smol</Name>
 							<OutputStreamName>${OriginStreamName}-smol</OutputStreamName>
 							<Encodes>
 								<Audio>
