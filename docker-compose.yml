@@ -3,6 +3,9 @@ version: '3.6'
 services:
 #  origin:
 #    image: airensoft/ovenmediaengine:0.15.15
+##    build:
+##      context: .
+##      dockerfile: ./Dockerfile
 #    restart: always
 #    ports:
 #    - "1935:1935/tcp" # RTMP Provider
@@ -23,6 +26,9 @@ services:
 
   edge:
     image: airensoft/ovenmediaengine:0.15.15
+#    build:
+#      context: .
+#      dockerfile: ./Dockerfile
     restart: always
     ports:
     - "80:80/tcp" # HTTP 1.2 HLS
