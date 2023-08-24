@@ -4,7 +4,7 @@ services:
 #  origin:
 #    image: airensoft/ovenmediaengine:0.15.15
 ##    build:
-##      context: .
+##      context: ./OvenMediaEngine/
 ##      dockerfile: ./Dockerfile
 #    restart: always
 #    ports:
@@ -24,6 +24,7 @@ services:
 #    volumes:
 #    - ./origin_conf:/opt/ovenmediaengine/bin/origin_conf
 #    - ./tls:/etc/ssl
+#    stop_signal: KILL
 
   edge:
     image: airensoft/ovenmediaengine:0.15.15
