@@ -29,7 +29,7 @@ services:
   edge:
     image: airensoft/ovenmediaengine:0.15.15
 #    build:
-#      context: .
+#      context: ./OvenMediaEngine/
 #      dockerfile: ./Dockerfile
     restart: always
     ports:
