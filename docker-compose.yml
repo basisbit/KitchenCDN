@@ -27,10 +27,10 @@ services:
 #    stop_signal: KILL
 
   edge:
-#    image: airensoft/ovenmediaengine:0.15.15
-    build:
-      context: ./OvenMediaEngine/
-      dockerfile: ./Dockerfile
+    image: airensoft/ovenmediaengine:0.15.15
+#    build:
+#      context: ./OvenMediaEngine/
+#      dockerfile: ./Dockerfile
     restart: always
     ports:
     - "80:80/tcp" # HTTP 1.2 HLS
