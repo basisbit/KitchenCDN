@@ -197,4 +197,25 @@
 			</Applications>
 		</VirtualHost>
 	</VirtualHosts>
+	<Alert>
+		<Url>${env:ALERT_WEBHOOK_URL:http://127.0.0.1/}</Url>
+		<SecretKey>${env:ALERT_WEBHOOK_SECRET:SampleSecret123}</SecretKey>
+		<Timeout>3000</Timeout>
+		<Rules>
+			<Ingress>
+				<MinBitrate>2000000</MinBitrate>
+				<MaxBitrate>9000000</MaxBitrate>
+				<MinFramerate>29</MinFramerate>
+				<MaxFramerate>60</MaxFramerate>
+				<MinWidth>1280</MinWidth>
+				<MinHeight>720</MinHeight>
+				<MaxWidth>1920</MaxWidth>
+				<MaxHeight>1080</MaxHeight>
+				<MinSamplerate>48000</MinSamplerate>
+				<MaxSamplerate>48000</MaxSamplerate>
+				<LongKeyFrameInterval />
+				<HasBFrame />
+			</Ingress>
+		</Rules>
+	</Alert>
 </Server>
