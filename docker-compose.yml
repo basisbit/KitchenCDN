@@ -2,7 +2,7 @@ version: '3.6'
 
 services:
 #  origin:
-#    image: airensoft/ovenmediaengine:0.15.15
+#    image: airensoft/ovenmediaengine:0.15.16
 ##    build:
 ##      context: ./OvenMediaEngine/
 ##      dockerfile: ./Dockerfile
@@ -29,7 +29,7 @@ services:
 #    stop_signal: KILL
 
   edge:
-    image: airensoft/ovenmediaengine:0.15.15
+    image: airensoft/ovenmediaengine:0.15.16
 #    build:
 #      context: ./OvenMediaEngine/
 #      dockerfile: ./Dockerfile
