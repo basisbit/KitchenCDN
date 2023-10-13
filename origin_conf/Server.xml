@@ -212,9 +212,9 @@
 		<Timeout>3000</Timeout>
 		<Rules>
 			<Ingress>
-				<MinBitrate>2000000</MinBitrate>
+				<MinBitrate>700000</MinBitrate>
 				<MaxBitrate>9000000</MaxBitrate>
-				<MinFramerate>29</MinFramerate>
+				<MinFramerate>25</MinFramerate>
 				<MaxFramerate>60</MaxFramerate>
 				<MinWidth>1280</MinWidth>
 				<MinHeight>720</MinHeight>
