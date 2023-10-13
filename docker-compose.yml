@@ -22,6 +22,8 @@ services:
 #    - OME_ACCESS_TOKEN=ome-access-token
 #    - ALERT_WEBHOOK_URL=https://yourAlertWebhook.tld/path
 #    - ALERT_WEBHOOK_SECRET=alert-hook-secret
+#    - ADMISSION_WEBHOOK_URL=admissionwekhookurl
+#    - ADMISSION_WEBHOOK_SECRET=admission-hook-secret
 #    command: /opt/ovenmediaengine/bin/OvenMediaEngine -c origin_conf
 #    volumes:
 #    - ./origin_conf:/opt/ovenmediaengine/bin/origin_conf

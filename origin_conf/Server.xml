@@ -195,6 +195,15 @@
 					</Publishers>
 				</Application>
 			</Applications>
+			<AdmissionWebhooks>
+				<ControlServerUrl>${env:ADMISSION_WEBHOOK_URL}</ControlServerUrl>
+				<SecretKey>${env:ADMISSION_WEBHOOK_SECRET:SampleSecret123}</SecretKey>
+				<Timeout>3000</Timeout>
+				<Enables>
+					<Providers>rtmp,webrtc,srt</Providers>
+					<Publishers></Publishers>
+				</Enables>
+			</AdmissionWebhooks>
 		</VirtualHost>
 	</VirtualHosts>
 	<Alert>
