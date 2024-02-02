@@ -213,9 +213,9 @@
 		<Rules>
 			<Ingress>
 				<MinBitrate>700000</MinBitrate>
-				<MaxBitrate>9000000</MaxBitrate>
+				<MaxBitrate>11000000</MaxBitrate>
 				<MinFramerate>25</MinFramerate>
-				<MaxFramerate>60</MaxFramerate>
+				<MaxFramerate>65</MaxFramerate>
 				<MinWidth>1280</MinWidth>
 				<MinHeight>720</MinHeight>
 				<MaxWidth>1920</MaxWidth>
